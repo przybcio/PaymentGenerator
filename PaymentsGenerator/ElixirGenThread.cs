@@ -23,7 +23,9 @@ namespace PaymentsGenerator
                         ps.Runspace = rs;
                         ps.AddScript(Utils.GetScript(Script));                        
                         ps.AddArgument(noOfFilesParam);
-                        ps.AddArgument(noOfRecordsParam);
+                        ps.AddArgument(noOfRecordsParam);                        
+                        ps.AddArgument(fileName);
+                        ps.AddArgument(noOfAcnt);
                         string path = Utils.GetCurrentAppPathDirectory();
                        
                         ps.AddArgument(path + OutputFolder);
@@ -52,19 +54,24 @@ namespace PaymentsGenerator
             this.mainWindow = mainWindow;
         }
 
-        public ElixirGenThread(MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam)
-        {
-            // TODO: Complete member initialization
-            this.mainWindow = mainWindow;
+        public ElixirGenThread(MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam) : this(mainWindow)
+        {           
             this.noOfFilesParam = noOfFilesParam;
             this.noOfRecordsParam = noOfRecordsParam;
         }
 
+        public ElixirGenThread(MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam, string fileName, int noOfAcnt) : this(mainWindow, noOfFilesParam, noOfRecordsParam)
+        {
+            this.fileName = fileName;
+            this.noOfAcnt = noOfAcnt;
+        }
         private const string Script = @"scripts/generate_elixir.ps1";
         private const string OutputFolder = @"\elixir";
         private MainWindow mainWindow;
         private int noOfFilesParam;
         private int noOfRecordsParam;
+        private string fileName;
+        private int noOfAcnt;
 
     }
 }

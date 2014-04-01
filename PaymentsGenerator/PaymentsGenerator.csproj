@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Cache.cs" />
     <Compile Include="ElixirGenThread.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="ModalWithFilesCount.xaml.cs">
       <DependentUpon>ModalWithFilesCount.xaml</DependentUpon>
     </Compile>

@@ -29,7 +29,7 @@ namespace PaymentsGenerator
 
         public void MainWindowDeleg(string msgContext)
         {
-            MyModel.ElixirOutputMsg = msgContext;
+            MyModel.ElixirOutputMsgs.Add(new Log() { LogMsg = msgContext, LogTime = DateTime.Now });
             MyModel.IsElixirGenerated = true;
 
         }
@@ -44,44 +44,41 @@ namespace PaymentsGenerator
 
         private void elxGenBtn_Click(object sender, RoutedEventArgs e)
         {
-            int noOfFilesParam = 0, noOfRecordsParam = 0;
-            if (fastGenCB.IsChecked.HasValue && fastGenCB.IsChecked.Value == true)
+            int noOfFilesParam = 0, noOfRecordsParam = 0, noOfAcntParam = noOfAcnt;
+            string fileNameParam = expressFileName;
+            ModalWithFilesCount mwfc = new ModalWithFilesCount();
+            if (mwfc.ShowDialog().HasValue)
             {
-                ModalWithFilesCount mwfc = new ModalWithFilesCount();
-                if (mwfc.ShowDialog().HasValue)
+
+                if (int.TryParse(mwfc.noOfFilesTb.Text, out noOfFilesParam) && int.TryParse(mwfc.noOfRecordsTb.Text, out noOfRecordsParam))
                 {
-                    
-                    if (int.TryParse(mwfc.noOfFilesTb.Text, out noOfFilesParam) && int.TryParse(mwfc.noOfRecordsTb.Text, out noOfRecordsParam))
-                    {
-                        //mnoze przez 8 poniewaz ma to wplyw na wyliczana kwote w platnosciach
-                        noOfFilesParam *= 8;
-                    }
+                    //mnoze przez 8 poniewaz ma to wplyw na wyliczana kwote w platnosciach
+                    noOfRecordsParam *= 8;
                 }
             }
-            else
+            if (fastGenCB.IsChecked.HasValue && fastGenCB.IsChecked.Value == false)
             {
-                
-                Utils.ExportToCsv(this.accountDataGrid.SelectedItems);
-                noOfFilesParam = 1;
-                noOfRecordsParam = this.accountDataGrid.SelectedItems.Count;
+                fileNameParam = Utils.ExportToCsv(this.accountDataGrid.SelectedItems);            
+                noOfAcntParam = this.accountDataGrid.SelectedItems.Count;
             }
 
-            ElixirGenThread egt = new ElixirGenThread(this, noOfFilesParam, noOfRecordsParam);
+            ElixirGenThread egt = new ElixirGenThread(this, noOfFilesParam, noOfRecordsParam, fileNameParam, noOfAcntParam);
             egt.Start();
-            MyModel.ElixirOutputMsg = "Skrypt uruchomiony";
+            //MyModel.AddOutputMsgs("Skrypt uruchomiony");
+            MyModel.ElixirOutputMsgs.Add(new Log() { LogMsg = "Skrypt uruchomiony", LogTime = DateTime.Now });
         }
 
         private void accountDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MyModel.NoOfSelectedAcntIsValid = this.accountDataGrid.SelectedItems.Count >= 8;
+            MyModel.SelCount = this.accountDataGrid.SelectedItems.Count;
+            MyModel.NoOfSelectedAcntIsValid = MyModel.SelCount  >= 8;
         }
 
         private void fastGenCB_Unchecked(object sender, RoutedEventArgs e)
         {
             MyModel.NoOfSelectedAcntIsValid = false;
             MyModel.Accounts = localCache.GetAccounts();
-           
-            
+            MyModel.TotalCount = MyModel.Accounts.Count;
         }
 
         private void fastGenCB_Checked(object sender, RoutedEventArgs e)
@@ -90,7 +87,15 @@ namespace PaymentsGenerator
             MyModel.Accounts = null;
         }
 
+        private void elxExpBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private Cache localCache = Cache.Instance();
+        private const string expressFileName = "rach.csv";
+        private const int noOfAcnt = 133061;
+
+        
     }
 }

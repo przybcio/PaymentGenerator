@@ -24,9 +24,10 @@ namespace PaymentsGenerator
         /// TODO: zrobić to generycznie 
         /// </summary>
         /// <param name="list"></param>
-        public static void ExportToCsv(IList list)
+        public static string ExportToCsv(IList list)
         {
-            using (FileStream fs = new FileStream("gen.csv", FileMode.Create))
+            string fileName = "gen_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
+            using (FileStream fs = new FileStream(fileName, FileMode.Create))
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (var item in list)
@@ -39,6 +40,7 @@ namespace PaymentsGenerator
 
                 fs.Write(buffer, 0, buffer.Length);
             }
+            return fileName;
         }
     }
 }

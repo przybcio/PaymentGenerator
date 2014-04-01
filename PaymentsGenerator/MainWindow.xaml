@@ -1,12 +1,11 @@
 ﻿<Window x:Class="PaymentsGenerator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="535" Width="436" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:PaymentsGenerator">
-    <Grid>
+        Title="MainWindow" Height="629" Width="436" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:PaymentsGenerator" FlowDirection="LeftToRight">
+    <Grid FlowDirection="LeftToRight">
         <Button Content="ELIXIR" Height="23" HorizontalAlignment="Left" Margin="12,36,0,0" Name="elxGenBtn" VerticalAlignment="Top" Width="75" Click="elxGenBtn_Click" IsEnabled="{Binding NoOfSelectedAcntIsValid}"  />
-        <Button Content="ELIXIR EXPORT" Height="23" HorizontalAlignment="Right" Margin="0,36,202,0" Name="elxExpBtn" VerticalAlignment="Top" Width="98" IsEnabled="{Binding IsElixirGenerated}" />
-        <TextBlock Height="159" HorizontalAlignment="Left" Margin="12,65,0,0" Name="elxOutputMsg" Text="{Binding ElixirOutputMsg}" VerticalAlignment="Top" Width="385" TextWrapping="Wrap" />
-        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Accounts}" Margin="12,230,0,0" Name="accountDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="385" SelectionChanged="accountDataGrid_SelectionChanged">
+        <Button Content="Sent ELIXIR to input folders" Height="23" HorizontalAlignment="Right" Margin="0,36,136,0" Name="elxExpBtn" VerticalAlignment="Top" Width="164" IsEnabled="{Binding IsElixirGenerated}" Click="elxExpBtn_Click" />
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Accounts}" Margin="12,221,0,0" Name="accountDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="385" SelectionChanged="accountDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="account_idColumn" Binding="{Binding Path=account_id}" Header="account id" Width="SizeToHeader" />
                 <DataGridTextColumn x:Name="account_noColumn" Binding="{Binding Path=account_no}" Header="account no" Width="180"  />
@@ -15,5 +14,23 @@
             </DataGrid.Columns>
         </DataGrid>
         <CheckBox Content="Fast Generation" Height="16" HorizontalAlignment="Left" Margin="12,12,0,0" Name="fastGenCB" VerticalAlignment="Top" IsChecked="True" Unchecked="fastGenCB_Unchecked" Checked="fastGenCB_Checked" />
+        <Label Content="{Binding TotalCount}" Height="28" HorizontalAlignment="Left" Margin="371,436,0,0" Name="totalAcntLabel" VerticalAlignment="Top" FontSize="10" FlowDirection="LeftToRight" />
+        <Label Content="{Binding SelCount}" Height="28" HorizontalAlignment="Right" Margin="0,0,33,101" Name="selAcntLabel" VerticalAlignment="Bottom" FontSize="10" FlowDirection="LeftToRight" />
+        <Label Content="Total accounts:" Height="28" HorizontalAlignment="Left" Margin="290,436,0,0" Name="label1" VerticalAlignment="Top" FontSize="10" FlowDirection="LeftToRight" />
+        <Label Content="Selected accounts:" Height="28" HorizontalAlignment="Left" Margin="275,461,0,0" Name="label2" VerticalAlignment="Top" FontSize="10" FlowDirection="LeftToRight" />
+        <ListBox Height="139" HorizontalAlignment="Stretch" Margin="12,65,16,0" Name="logLB" VerticalAlignment="Top" Width="385" ItemsSource="{Binding ElixirOutputMsgs}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0, 2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LogMsg}"  Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding LogTime}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
