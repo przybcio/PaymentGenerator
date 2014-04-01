@@ -1,0 +1,19 @@
+﻿<Window x:Class="PaymentsGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="535" Width="436" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:PaymentsGenerator">
+    <Grid>
+        <Button Content="ELIXIR" Height="23" HorizontalAlignment="Left" Margin="12,36,0,0" Name="elxGenBtn" VerticalAlignment="Top" Width="75" Click="elxGenBtn_Click" IsEnabled="{Binding NoOfSelectedAcntIsValid}"  />
+        <Button Content="ELIXIR EXPORT" Height="23" HorizontalAlignment="Right" Margin="0,36,202,0" Name="elxExpBtn" VerticalAlignment="Top" Width="98" IsEnabled="{Binding IsElixirGenerated}" />
+        <TextBlock Height="159" HorizontalAlignment="Left" Margin="12,65,0,0" Name="elxOutputMsg" Text="{Binding ElixirOutputMsg}" VerticalAlignment="Top" Width="385" TextWrapping="Wrap" />
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Accounts}" Margin="12,230,0,0" Name="accountDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="385" SelectionChanged="accountDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="account_idColumn" Binding="{Binding Path=account_id}" Header="account id" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="account_noColumn" Binding="{Binding Path=account_no}" Header="account no" Width="180"  />
+                <DataGridTextColumn x:Name="customer_idColumn" Binding="{Binding Path=customer_id}" Header="customer id" Width="SizeToHeader" />
+                <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <CheckBox Content="Fast Generation" Height="16" HorizontalAlignment="Left" Margin="12,12,0,0" Name="fastGenCB" VerticalAlignment="Top" IsChecked="True" Unchecked="fastGenCB_Unchecked" Checked="fastGenCB_Checked" />
+    </Grid>
+</Window>
