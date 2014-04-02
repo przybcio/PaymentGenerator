@@ -4,7 +4,7 @@
         Title="MainWindow" Height="629" Width="436" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:my="clr-namespace:PaymentsGenerator" FlowDirection="LeftToRight">
     <Grid FlowDirection="LeftToRight">
         <Button Content="ELIXIR" Height="23" HorizontalAlignment="Left" Margin="12,36,0,0" Name="elxGenBtn" VerticalAlignment="Top" Width="75" Click="elxGenBtn_Click" IsEnabled="{Binding NoOfSelectedAcntIsValid}"  />
-        <Button Content="Sent ELIXIR to input folders" Height="23" HorizontalAlignment="Right" Margin="0,36,136,0" Name="elxExpBtn" VerticalAlignment="Top" Width="164" IsEnabled="{Binding IsElixirGenerated}" Click="elxExpBtn_Click" />
+        <Button Content="Sent ELIXIR to input folders" Height="23" HorizontalAlignment="Right" Margin="0,36,96,0" Name="elxExpBtn" VerticalAlignment="Top" Width="164" IsEnabled="{Binding IsElixirGenerated}" Click="elxExpBtn_Click" />
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Accounts}" Margin="12,221,0,0" Name="accountDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="385" SelectionChanged="accountDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="account_idColumn" Binding="{Binding Path=account_id}" Header="account id" Width="SizeToHeader" />
@@ -13,7 +13,7 @@
                 <DataGridTextColumn x:Name="statusColumn" Binding="{Binding Path=status}" Header="status" Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
-        <CheckBox Content="Fast Generation" Height="16" HorizontalAlignment="Left" Margin="12,12,0,0" Name="fastGenCB" VerticalAlignment="Top" IsChecked="True" Unchecked="fastGenCB_Unchecked" Checked="fastGenCB_Checked" />
+        <CheckBox Content="Fast Generation" Height="16" HorizontalAlignment="Left" Margin="12,9,0,0" Name="fastGenCB" VerticalAlignment="Top" IsChecked="True" Unchecked="fastGenCB_Unchecked" Checked="fastGenCB_Checked" />
         <Label Content="{Binding TotalCount}" Height="28" HorizontalAlignment="Left" Margin="371,436,0,0" Name="totalAcntLabel" VerticalAlignment="Top" FontSize="10" FlowDirection="LeftToRight" />
         <Label Content="{Binding SelCount}" Height="28" HorizontalAlignment="Right" Margin="0,0,33,101" Name="selAcntLabel" VerticalAlignment="Bottom" FontSize="10" FlowDirection="LeftToRight" />
         <Label Content="Total accounts:" Height="28" HorizontalAlignment="Left" Margin="290,436,0,0" Name="label1" VerticalAlignment="Top" FontSize="10" FlowDirection="LeftToRight" />
@@ -32,5 +32,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Content="SQL Server Instance" Height="23" HorizontalAlignment="Right" Margin="0,5,136,0" Name="sqlConnBtn" VerticalAlignment="Top" Width="124" Click="sqlConnBtn_Click" />
     </Grid>
 </Window>

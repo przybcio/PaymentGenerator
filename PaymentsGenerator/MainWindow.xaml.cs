@@ -64,7 +64,6 @@ namespace PaymentsGenerator
 
             ElixirGenThread egt = new ElixirGenThread(this, noOfFilesParam, noOfRecordsParam, fileNameParam, noOfAcntParam);
             egt.Start();
-            //MyModel.AddOutputMsgs("Skrypt uruchomiony");
             MyModel.ElixirOutputMsgs.Add(new Log() { LogMsg = "Skrypt uruchomiony", LogTime = DateTime.Now });
         }
 
@@ -95,6 +94,12 @@ namespace PaymentsGenerator
         private Cache localCache = Cache.Instance();
         private const string expressFileName = "rach.csv";
         private const int noOfAcnt = 133061;
+
+        private void sqlConnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ModalSqlServerInstance mssi = new ModalSqlServerInstance();
+            mssi.ShowDialog();
+        }
 
         
     }
