@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PaymentsGenerator
+namespace PaymentsGenerator.ViewModels
 {
     public class Log
     {

@@ -32,7 +32,7 @@ namespace PaymentsGenerator
                         IAsyncResult async = ps.BeginInvoke();
 
                         var output = ps.EndInvoke(async);
-                        PaymentsGenerator.MainWindow.UpdateContext deleg = mainWindow.MainWindowDeleg;
+                        PaymentsGenerator.Windows.MainWindow.UpdateContext deleg = mainWindow.MainWindowDeleg;
 
                         
                         StringBuilder sb = new StringBuilder();
@@ -49,25 +49,25 @@ namespace PaymentsGenerator
         }
 
         
-        public ElixirGenThread(MainWindow mainWindow)
+        public ElixirGenThread(Windows.MainWindow mainWindow)
         {           
             this.mainWindow = mainWindow;
         }
 
-        public ElixirGenThread(MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam) : this(mainWindow)
+        public ElixirGenThread(Windows.MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam) : this(mainWindow)
         {           
             this.noOfFilesParam = noOfFilesParam;
             this.noOfRecordsParam = noOfRecordsParam;
         }
 
-        public ElixirGenThread(MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam, string fileName, int noOfAcnt) : this(mainWindow, noOfFilesParam, noOfRecordsParam)
+        public ElixirGenThread(Windows.MainWindow mainWindow, int noOfFilesParam, int noOfRecordsParam, string fileName, int noOfAcnt) : this(mainWindow, noOfFilesParam, noOfRecordsParam)
         {
             this.fileName = fileName;
             this.noOfAcnt = noOfAcnt;
         }
         private const string Script = @"scripts/generate_elixir.ps1";
         private const string OutputFolder = @"\elixir";
-        private MainWindow mainWindow;
+        private Windows.MainWindow mainWindow;
         private int noOfFilesParam;
         private int noOfRecordsParam;
         private string fileName;

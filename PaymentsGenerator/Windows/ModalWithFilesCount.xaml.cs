@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PaymentsGenerator
+namespace PaymentsGenerator.Windows
 {
     /// <summary>
     /// Interaction logic for ModalWithFilesCount.xaml

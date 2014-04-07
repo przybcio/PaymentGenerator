@@ -1,0 +1,23 @@
+﻿<Window x:Class="PaymentsGenerator.Prototypes.ModalSqlServerInstance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:data="clr-namespace:System.Data;assembly=System.Data"
+        Title="ModalSqlServerInstance" Height="481" Width="300">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="odp" ObjectInstance="{x:Static data:Sql.SqlDataSourceEnumerator.Instance}" MethodName="GetDataSources" IsAsynchronous="True" DataChanged="ObjectDataProvider_DataChanged" >
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" Height="125" HorizontalAlignment="Left" Margin="12,12,0,0" Name="sqlInstDG" VerticalAlignment="Top" Width="254" ItemsSource="{Binding Source={StaticResource odp}, Mode=OneWay}" SelectionChanged="sqlInstDG_SelectionChanged" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ServerName" Binding="{Binding Path=ServerName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="InstanceName" Binding="{Binding Path=InstanceName}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Height="229" HorizontalAlignment="Left" Margin="12,143,0,0" Name="connStringTB" Text="Connection string:" VerticalAlignment="Top" TextWrapping="Wrap" Width="254" />
+        <Button Content="Ok" Height="23" HorizontalAlignment="Left" Margin="154,378,0,0" Name="okBtn" VerticalAlignment="Top" Width="53" Click="okBtn_Click" />
+        <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,378,12,0" Name="cancelBtn" VerticalAlignment="Top" Width="53" Click="cancelBtn_Click" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,378,0,0" Name="sqlInstancesCB" VerticalAlignment="Top" Width="120" SelectionChanged="sqlInstancesCB_SelectionChanged" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,407,0,0" Name="sqlCatalogsCB" VerticalAlignment="Top" Width="120" SelectionChanged="sqlCatalogsCB_SelectionChanged" />
+    </Grid>
+</Window>

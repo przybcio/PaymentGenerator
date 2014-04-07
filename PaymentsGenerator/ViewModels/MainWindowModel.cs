@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 
-namespace PaymentsGenerator
+namespace PaymentsGenerator.ViewModels
 {
     public class MainWindowModel : INotifyPropertyChanged
     {

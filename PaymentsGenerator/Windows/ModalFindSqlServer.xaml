@@ -1,0 +1,20 @@
+﻿<Window x:Class="PaymentsGenerator.Windows.ModalFindSqlServer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:data="clr-namespace:System.Data;assembly=System.Data"
+        xmlns:local="clr-namespace:PaymentsGenerator.ViewModelCommandsAndBehaviors"
+        Title="ModalFindSqlServer" Height="329" Width="300" DataContext="{Binding}">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="odp" ObjectInstance="{x:Static data:Sql.SqlDataSourceEnumerator.Instance}" MethodName="GetDataSources" IsAsynchronous="True">
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="146,12,0,0" Name="comboBox1" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SqlInstances}" local:SelectionChangedComboBoxBehavior.SelectionChanged="{Binding SqlInstanceChangedCmd}" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="146,41,0,0" Name="comboBox2" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SqlCatalogs}" local:SelectionChangedComboBoxBehavior.SelectionChanged="{Binding SqlCatalogChangedCmd}" />
+        <TextBlock Height="156" HorizontalAlignment="Left" Margin="12,70,0,0" Name="textBlock1" VerticalAlignment="Top" Width="254" Text="{Binding ConnString}" TextWrapping="Wrap" />
+        <Label Content="Sql Server servers:" Height="28" HorizontalAlignment="Left" Margin="12,7,0,0" Name="label1" VerticalAlignment="Top" Width="140" />
+        <Label Content="Sql server instances:" Height="28" HorizontalAlignment="Left" Margin="12,36,0,0" Name="label2" VerticalAlignment="Top" Width="128" />
+        <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="110,255,0,0" Name="button1" VerticalAlignment="Top" Width="75" Command="{Binding OkCmd}" />
+        <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="191,255,0,0" Name="button2" VerticalAlignment="Top" Width="75" />
+    </Grid>
+</Window>

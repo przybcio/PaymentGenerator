@@ -15,8 +15,9 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.IO;
 using System.Threading;
+using PaymentsGenerator.ViewModels;
 
-namespace PaymentsGenerator
+namespace PaymentsGenerator.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -97,8 +98,10 @@ namespace PaymentsGenerator
 
         private void sqlConnBtn_Click(object sender, RoutedEventArgs e)
         {
-            ModalSqlServerInstance mssi = new ModalSqlServerInstance();
-            mssi.ShowDialog();
+            //ModalSqlServerInstance mssi = new ModalSqlServerInstance();
+            //mssi.ShowDialog();
+            ModalFindSqlServer mfss = new ModalFindSqlServer();
+            mfss.Show();
         }
 
         
