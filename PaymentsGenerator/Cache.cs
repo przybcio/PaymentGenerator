@@ -17,16 +17,20 @@ namespace PaymentsGenerator
         }
         public IList<account> GetAccounts()
         {
-            if (cachedList == null)
+            IList<account> resultList;
+            if (!cachedList.TryGetValue(instanceName, out resultList))
+            {
                 using (var context = new Model1Container(enityBuilder.ToString()))
-                    cachedList = context.account.Where(acnt => acnt.customer_id != 1 && acnt.status == "A").ToList();
-
-            return cachedList;
+                    resultList = context.account.Where(acnt => acnt.customer_id != 1 && acnt.status == "A").ToList();
+                cachedList.Add(new KeyValuePair<string, IList<account>>(instanceName, resultList));
+            }
+            return resultList;
         }
 
-        public string SetEntityConnection(string dataSourceName, string initCatalogName)
+        public string SetEntityConnection(string serverName, string initInstanceName)
         {
-            enityBuilder.ProviderConnectionString = "Data Source=" + dataSourceName + "\\" + initCatalogName + ";Initial Catalog=ozyrys;Integrated Security=SSPI;multipleactiveresultsets=True;App=EntityFramework";
+            this.instanceName = initInstanceName.ToUpper();
+            enityBuilder.ProviderConnectionString = "Data Source=" + serverName + "\\" + initInstanceName + ";Initial Catalog=ozyrys;Integrated Security=SSPI;multipleactiveresultsets=True;App=EntityFramework";
             return enityBuilder.ToString();
         }
         private Cache()
@@ -40,7 +44,7 @@ namespace PaymentsGenerator
         private EntityConnectionStringBuilder enityBuilder = new EntityConnectionStringBuilder(); 
         private string sqlConn = @"Data Source=.\sqlexpress_dnb;initial catalog=ozyrys;integrated security=True;multipleactiveresultsets=True;App=EntityFramework"; 
         private static Cache instance;
-        //TODO: change to dictionary where key is DB instace name
-        private IList<account> cachedList;
+        private string instanceName = "sqlexpress_dnb".ToUpper();
+        private IDictionary<string, IList<account>> cachedList = new Dictionary<string, IList<account>>();
     }
 }

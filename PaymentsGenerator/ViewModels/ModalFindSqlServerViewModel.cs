@@ -69,6 +69,7 @@ namespace PaymentsGenerator.ViewModels
             get;
             set;
         }
+
         #endregion
 
         public ModalFindSqlServerViewModel()
