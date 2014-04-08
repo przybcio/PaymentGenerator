@@ -3,7 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
         xmlns:local="clr-namespace:PaymentsGenerator.ViewModelCommandsAndBehaviors"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="ModalFindSqlServer" Height="329" Width="300" DataContext="{Binding}">
+    <i:Interaction.Behaviors>
+        <local:WindowCloseBehaviour CloseButton="{Binding ElementName=button2}" />
+        <local:WindowCloseBehaviour CloseButton="{Binding ElementName=button1}" />
+    </i:Interaction.Behaviors>
     <Window.Resources>
         <ObjectDataProvider x:Key="odp" ObjectInstance="{x:Static data:Sql.SqlDataSourceEnumerator.Instance}" MethodName="GetDataSources" IsAsynchronous="True">
         </ObjectDataProvider>

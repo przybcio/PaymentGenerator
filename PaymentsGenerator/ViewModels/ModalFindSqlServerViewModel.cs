@@ -74,7 +74,7 @@ namespace PaymentsGenerator.ViewModels
         public ModalFindSqlServerViewModel()
         {
             SqlInstanceChangedCmd = new RelayCommand(pars => EventInstanceChanged(pars.ToString()));
-            SqlCatalogChangedCmd = new RelayCommand(pars => EventCatalogChanged(pars.ToString()));
+            SqlCatalogChangedCmd = new RelayCommand(pars => EventCatalogChanged(pars.ToString()));          
             OkCmd = new RelayCommand(pars => OkClicked());
             BackgroundWorker sqlInstancesWorker = new BackgroundWorker();
             sqlInstancesWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(sqlInstancesWorker_RunWorkerCompleted);
@@ -89,7 +89,7 @@ namespace PaymentsGenerator.ViewModels
             selectedCatalog = msg;
             ConnString = "Connection string: " + Cache.Instance().SetEntityConnection(selectedInstance, selectedCatalog);
         }
-
+        
         private void EventInstanceChanged(string msg)
         {
             selectedInstance = msg;
@@ -104,8 +104,7 @@ namespace PaymentsGenerator.ViewModels
             }
             
         }
-        //TODO: implement Undo on Cache using Design patterns
-        //TODO: Do close window
+        //TODO: implement Undo on Cache using Design patterns        
         private void OkClicked()
         {
             MessageBox.Show("ok");

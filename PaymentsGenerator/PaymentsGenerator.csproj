@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -46,6 +49,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +74,7 @@
     <Compile Include="ViewModelCommandsAndBehaviors\SelectionChangedComboBoxBehavior.cs" />
     <Compile Include="Prototypes\DelegateCommand.cs" />
     <Compile Include="ElixirGenThread.cs" />
+    <Compile Include="ViewModelCommandsAndBehaviors\WindowCloseBehaviour.cs" />
     <Compile Include="ViewModels\Log.cs" />
     <Compile Include="Windows\ModalFindSqlServer.xaml.cs">
       <DependentUpon>ModalFindSqlServer.xaml</DependentUpon>
@@ -134,6 +141,7 @@
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.Config" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\Model1Container.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
