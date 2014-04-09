@@ -83,6 +83,7 @@
     <Compile Include="Prototypes\MouseWheelTextBlockBehavior.cs" />
     <Compile Include="ViewModelCommandsAndBehaviors\WindowCloseBehaviour.cs" />
     <Compile Include="Model\Log.cs" />
+    <Compile Include="ViewModels\ModalWithFilesCountViewModel.cs" />
     <Compile Include="Windows\ModalFindSqlServer.xaml.cs">
       <DependentUpon>ModalFindSqlServer.xaml</DependentUpon>
     </Compile>

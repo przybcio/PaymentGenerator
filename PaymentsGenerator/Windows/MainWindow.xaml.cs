@@ -18,6 +18,7 @@ using System.Threading;
 using PaymentsGenerator.ViewModels;
 using PaymentsGenerator.Model;
 using PaymentsGenerator.ModelCommands;
+using System.Collections;
 
 namespace PaymentsGenerator.Windows
 {
@@ -49,11 +50,11 @@ namespace PaymentsGenerator.Windows
         {
             int noOfFilesParam = 0, noOfRecordsParam = 0, noOfAcntParam = noOfAcnt;
             string fileNameParam = expressFileName;
-            ModalWithFilesCount mwfc = new ModalWithFilesCount();
+            ModalWithFilesCountViewModel vm = new ModalWithFilesCountViewModel();
+            ModalWithFilesCount mwfc = new ModalWithFilesCount(vm);
             if (mwfc.ShowDialog().HasValue)
             {
-
-                if (int.TryParse(mwfc.noOfFilesTb.Text, out noOfFilesParam) && int.TryParse(mwfc.noOfRecordsTb.Text, out noOfRecordsParam))
+                if (int.TryParse(vm.FilesCount, out noOfFilesParam) && int.TryParse(vm.RowsCount, out noOfRecordsParam))
                 {
                     //mnoze przez 8 poniewaz ma to wplyw na wyliczana kwote w platnosciach
                     noOfRecordsParam *= 8;

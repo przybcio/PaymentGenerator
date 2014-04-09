@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Collections;
+using PaymentsGenerator.Abstracts;
 
 namespace PaymentsGenerator
 {
@@ -20,11 +21,7 @@ namespace PaymentsGenerator
             return Directory.GetCurrentDirectory();
         }
 
-        /// <summary>
-        /// TODO: zrobić to generycznie 
-        /// </summary>
-        /// <param name="list"></param>
-        public static string ExportToCsv(IList list)
+        public static string ExportToCsv(IList list) 
         {
             string fileName = "gen_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
             using (FileStream fs = new FileStream(fileName, FileMode.Create))

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PaymentsGenerator.ViewModels;
 
 namespace PaymentsGenerator.Windows
 {
@@ -23,9 +24,10 @@ namespace PaymentsGenerator.Windows
             InitializeComponent();
         }
 
-        private void okBtn_Click(object sender, RoutedEventArgs e)
+        public ModalWithFilesCount(ModalWithFilesCountViewModel viewModel) : this()
         {
-            this.Close();
+            this.DataContext = viewModel;
         }
+        
     }
 }
