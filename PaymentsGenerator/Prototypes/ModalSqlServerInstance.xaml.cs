@@ -38,7 +38,7 @@ namespace PaymentsGenerator.Prototypes
             {
                 string dataSourceName = drv[0].ToString();
                 string initCatalogName = drv[1].ToString();
-                connStringTB.Text = "Connection string: " + Cache.Instance().SetEntityConnection(dataSourceName, initCatalogName);
+                //connStringTB.Text = "Connection string: " + AccountCache.Instance().SetEntityConnection(dataSourceName, initCatalogName);
             }
         }
 
@@ -82,8 +82,8 @@ namespace PaymentsGenerator.Prototypes
             var instance = ((ComboBox)sender).SelectedValue as string;
             var catalog = ((ComboBox)sender).SelectedValue as string;
 
-            if (!string.IsNullOrEmpty(instance) && !string.IsNullOrEmpty(catalog))
-                connStringTB.Text = "Connection string: " + Cache.Instance().SetEntityConnection(instance, catalog);
+            //if (!string.IsNullOrEmpty(instance) && !string.IsNullOrEmpty(catalog))
+            //    connStringTB.Text = "Connection string: " + AccountCache.Instance().SetEntityConnection(instance, catalog);
 
         }
     }

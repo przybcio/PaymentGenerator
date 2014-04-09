@@ -16,6 +16,8 @@ using System.Management.Automation.Runspaces;
 using System.IO;
 using System.Threading;
 using PaymentsGenerator.ViewModels;
+using PaymentsGenerator.Model;
+using PaymentsGenerator.ModelCommands;
 
 namespace PaymentsGenerator.Windows
 {
@@ -77,8 +79,9 @@ namespace PaymentsGenerator.Windows
         private void fastGenCB_Unchecked(object sender, RoutedEventArgs e)
         {
             MyModel.NoOfSelectedAcntIsValid = false;
-            MyModel.Accounts = localCache.GetAccounts();
-            MyModel.TotalCount = MyModel.Accounts.Count;
+            MyModel.Accounts = localCache.Accounts();
+            if (MyModel.Accounts != null)
+                MyModel.TotalCount = MyModel.Accounts.Count;
         }
 
         private void fastGenCB_Checked(object sender, RoutedEventArgs e)
@@ -92,7 +95,7 @@ namespace PaymentsGenerator.Windows
 
         }
 
-        private Cache localCache = Cache.Instance();
+        private InvokerAccountCache localCache =  InvokerAccountCache.Instance();
         private const string expressFileName = "rach.csv";
         private const int noOfAcnt = 133061;
 

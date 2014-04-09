@@ -71,14 +71,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cache.cs" />
+    <Compile Include="Abstracts\Command.cs" />
+    <Compile Include="Abstracts\IAccounts.cs" />
+    <Compile Include="Model\AccountCache.cs" />
+    <Compile Include="ModelCommands\AccountCacheCommand.cs" />
+    <Compile Include="ModelCommands\InvokerAccountCache.cs" />
     <Compile Include="ViewModelCommandsAndBehaviors\RelayCommand.cs" />
     <Compile Include="ViewModelCommandsAndBehaviors\SelectionChangedComboBoxBehavior.cs" />
     <Compile Include="Prototypes\DelegateCommand.cs" />
     <Compile Include="ElixirGenThread.cs" />
     <Compile Include="Prototypes\MouseWheelTextBlockBehavior.cs" />
     <Compile Include="ViewModelCommandsAndBehaviors\WindowCloseBehaviour.cs" />
-    <Compile Include="ViewModels\Log.cs" />
+    <Compile Include="Model\Log.cs" />
     <Compile Include="Windows\ModalFindSqlServer.xaml.cs">
       <DependentUpon>ModalFindSqlServer.xaml</DependentUpon>
     </Compile>

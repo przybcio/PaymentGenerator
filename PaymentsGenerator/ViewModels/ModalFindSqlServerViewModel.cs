@@ -9,6 +9,7 @@ using System.Windows;
 using System.Data.Sql;
 using System.Data;
 using PaymentsGenerator.ViewModelCommandsAndBehaviors;
+using PaymentsGenerator.ModelCommands;
 
 namespace PaymentsGenerator.ViewModels
 {
@@ -70,6 +71,11 @@ namespace PaymentsGenerator.ViewModels
             set;
         }
 
+        public ICommand CancelCmd
+        {
+            get;
+            set;
+        }
         #endregion
 
         public ModalFindSqlServerViewModel()
@@ -77,18 +83,19 @@ namespace PaymentsGenerator.ViewModels
             SqlInstanceChangedCmd = new RelayCommand(pars => EventInstanceChanged(pars.ToString()));
             SqlCatalogChangedCmd = new RelayCommand(pars => EventCatalogChanged(pars.ToString()));          
             OkCmd = new RelayCommand(pars => OkClicked());
+            CancelCmd = new RelayCommand(pars => CancelClicked());
             BackgroundWorker sqlInstancesWorker = new BackgroundWorker();
             sqlInstancesWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(sqlInstancesWorker_RunWorkerCompleted);
             sqlInstancesWorker.DoWork += new DoWorkEventHandler(sqlInstancesWorker_DoWork);
             sqlInstancesWorker.RunWorkerAsync();
         }
-        //TODO: Cache datasource
+        //TODO: AccountCache datasource
         private EnumerableRowCollection<DataRow> datasource;
         #region Events' implementation
         private void EventCatalogChanged(string msg)
         {
             selectedCatalog = msg;
-            ConnString = "Connection string: " + Cache.Instance().SetEntityConnection(selectedInstance, selectedCatalog);
+            ConnString = "Connection string: " + InvokerAccountCache.Instance().Do(selectedInstance, selectedCatalog);            
         }
         
         private void EventInstanceChanged(string msg)
@@ -105,10 +112,14 @@ namespace PaymentsGenerator.ViewModels
             }
             
         }
-        //TODO: implement Undo on Cache using Design patterns        
+        
         private void OkClicked()
         {
-            MessageBox.Show("ok");
+        }
+
+        private void CancelClicked()
+        {
+            InvokerAccountCache.Instance().Undo();
         }
         #endregion
 

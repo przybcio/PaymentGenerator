@@ -20,6 +20,6 @@
         <Label Content="Sql Server servers:" Height="28" HorizontalAlignment="Left" Margin="12,7,0,0" Name="label1" VerticalAlignment="Top" Width="140" />
         <Label Content="Sql server instances:" Height="28" HorizontalAlignment="Left" Margin="12,36,0,0" Name="label2" VerticalAlignment="Top" Width="128" />
         <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="110,255,0,0" Name="button1" VerticalAlignment="Top" Width="75" Command="{Binding OkCmd}" />
-        <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="191,255,0,0" Name="button2" VerticalAlignment="Top" Width="75" />        
+        <Button Content="Cancel" Height="23" HorizontalAlignment="Left" Margin="191,255,0,0" Name="button2" VerticalAlignment="Top" Width="75" Command="{Binding CancelCmd}" />        
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using PaymentsGenerator.Model;
 
 namespace PaymentsGenerator.ViewModels
 {
