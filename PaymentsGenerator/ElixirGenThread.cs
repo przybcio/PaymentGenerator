@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Management.Automation.Runspaces;
 using System.Management.Automation;
+using PaymentsGenerator.ViewModels;
+using PaymentsGenerator.Model;
 
 
 namespace PaymentsGenerator
@@ -32,16 +34,14 @@ namespace PaymentsGenerator
                         IAsyncResult async = ps.BeginInvoke();
 
                         var output = ps.EndInvoke(async);
-                        PaymentsGenerator.Windows.MainWindow.UpdateContext deleg = mainWindow.MainWindowDeleg;
 
-                        
                         StringBuilder sb = new StringBuilder();
                         foreach (var item in output)
                         {
                             sb.AppendLine(item.BaseObject.ToString());
                         }
-                        mainWindow.Dispatcher.Invoke(deleg, sb.ToString());
-
+                        //TODO: wprowadzić interfejs
+                        viewModel.AddOutputMsg(sb.ToString());
                     }
                 }
             });
@@ -65,6 +65,15 @@ namespace PaymentsGenerator
             this.fileName = fileName;
             this.noOfAcnt = noOfAcnt;
         }
+        //TODO: wprowadzić interfejs
+        public ElixirGenThread(MainWindowViewModel viewModel, int noOfFilesParam, int noOfRecordsParam, string fileName, int noOfAcnt)
+        {
+            this.noOfFilesParam = noOfFilesParam;
+            this.noOfRecordsParam = noOfRecordsParam;
+            this.fileName = fileName;
+            this.noOfAcnt = noOfAcnt;
+            this.viewModel = viewModel;
+        }
         private const string Script = @"scripts/generate_elixir.ps1";
         private const string OutputFolder = @"\elixir";
         private Windows.MainWindow mainWindow;
@@ -72,6 +81,7 @@ namespace PaymentsGenerator
         private int noOfRecordsParam;
         private string fileName;
         private int noOfAcnt;
+        private MainWindowViewModel viewModel;
 
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Prototypes\DelegateCommand.cs" />
     <Compile Include="ElixirGenThread.cs" />
     <Compile Include="Prototypes\MouseWheelTextBlockBehavior.cs" />
+    <Compile Include="ViewModelCommandsAndBehaviors\SelectionChangedDataGridBehavior.cs" />
     <Compile Include="ViewModelCommandsAndBehaviors\WindowCloseBehaviour.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="ViewModels\ModalWithFilesCountViewModel.cs" />
@@ -126,7 +127,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\MainWindowModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

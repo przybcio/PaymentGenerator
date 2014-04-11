@@ -21,7 +21,7 @@ namespace PaymentsGenerator
             return Directory.GetCurrentDirectory();
         }
 
-        public static string ExportToCsv(IList list) 
+        public static string ExportToCsv(IList<account> list) 
         {
             string fileName = "gen_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".csv";
             using (FileStream fs = new FileStream(fileName, FileMode.Create))
@@ -29,7 +29,7 @@ namespace PaymentsGenerator
                 StringBuilder sb = new StringBuilder();
                 foreach (var item in list)
                 {
-                    sb.AppendLine(((account)item).account_no);
+                    sb.AppendLine(item.account_no);
                     //sb.Append(";");
                     //sb.Append(Environment.NewLine);
                 }
